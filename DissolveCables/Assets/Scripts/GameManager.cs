@@ -49,8 +49,8 @@ public class GameManager : MonoBehaviour
                             */
 
                             //Refacotred version
-                             _bottomPlug = hit.collider.GetComponent<BottomPlug>();
-                            _bottomPlug.SelectedPosition(_bottomPlug.currentSocket.GetComponent<Socket>().autoMovePosition, _bottomPlug.currentSocket);
+                            _bottomPlug = hit.collider.GetComponent<BottomPlug>();
+                            _bottomPlug.MoveStart("SelectedPosition", _bottomPlug.currentSocket, _bottomPlug.currentSocket.GetComponent<Socket>().autoMovePosition);
 
                             //We adding to variable our hitted plug and sockets
                             selectedPlug = hit.collider.gameObject;
@@ -74,7 +74,8 @@ public class GameManager : MonoBehaviour
                             selectedSocket.GetComponent<Socket>().isSocketFull = false;
 
                             Socket _socket = hit.collider.GetComponent<Socket>();
-                            selectedPlug.GetComponent<BottomPlug>().ChangePosition(_socket.autoMovePosition, hit.collider.gameObject);
+
+                            _bottomPlug.MoveStart("ChangePosition", hit.collider.gameObject, _socket.autoMovePosition);
 
                             //When our plug insert to new socker, our socket need to be not avaliable
                             _socket.isSocketFull = true;
@@ -90,7 +91,7 @@ public class GameManager : MonoBehaviour
                         {
                             //Assaign to our hit plug's socket to move back
                             //Hit.collider.gameobject is a transform position for our plug
-                            selectedPlug.GetComponent<BottomPlug>().BackToSocket(hit.collider.gameObject);
+                            _bottomPlug.MoveStart("BackToSocket", hit.collider.gameObject);
 
                             //We cleart variables our hitted plug and sockets
                             selectedPlug = null;

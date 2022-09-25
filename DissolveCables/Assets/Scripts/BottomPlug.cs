@@ -20,6 +20,8 @@ public class BottomPlug : MonoBehaviour
     GameObject movementPosition;
     GameObject targetSocket;
 
+
+    /* ------------ UNREFACTORED VERSION
     //transform object which is after selection, the object will go to that place
     //Socket is, where the plug taken from
     public void SelectedPosition(GameObject transformObjectPosition, GameObject socket)
@@ -39,6 +41,31 @@ public class BottomPlug : MonoBehaviour
     {
         targetSocket = socket;
         isInsertToSocket = true;
+    }
+    ------------ UNREFACTORED VERSION
+    */
+
+    //REFACTORED VERSION
+    public void MoveStart(string process, GameObject socket, GameObject transformObjectPosition = null)
+    {
+        switch (process)
+        {
+            //transform object which is after selection, the object will go to that place
+            //Socket is, where the plug taken from
+            case "SelectedPosition":
+                movementPosition = transformObjectPosition;
+                isSelected = true;
+                break;
+            case "ChangePosition":
+                targetSocket = socket;
+                movementPosition = transformObjectPosition;
+                isPositionChanged = true;
+                break;
+            case "BackToSocket":
+                targetSocket = socket;
+                isInsertToSocket = true;
+                break;
+        }
     }
 
     private void Update()
