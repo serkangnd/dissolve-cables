@@ -8,6 +8,7 @@ TagManager:
   - BluePlug
   - RedPlug
   - YellowPlug
+  - CablePart
   layers:
   - Default
   - TransparentFX

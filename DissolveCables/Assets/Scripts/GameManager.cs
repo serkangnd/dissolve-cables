@@ -10,6 +10,16 @@ public class GameManager : MonoBehaviour
     private GameObject selectedSocket;
     public bool isMoving;
 
+    BottomPlug _bottomPlug;
+
+    [Header("--- Level Settings ---")]
+    public GameObject[] collisionControlObjects;
+    public GameObject[] plugs;
+    public int levelTargetSockets;
+    public bool[] collisionDetections;
+    int completedSockets;
+
+
     private void Start()
     {
         
@@ -39,7 +49,7 @@ public class GameManager : MonoBehaviour
                             */
 
                             //Refacotred version
-                            BottomPlug _bottomPlug = hit.collider.GetComponent<BottomPlug>();
+                             _bottomPlug = hit.collider.GetComponent<BottomPlug>();
                             _bottomPlug.SelectedPosition(_bottomPlug.currentSocket.GetComponent<Socket>().autoMovePosition, _bottomPlug.currentSocket);
 
                             //We adding to variable our hitted plug and sockets
@@ -95,6 +105,55 @@ public class GameManager : MonoBehaviour
 
                 }
             }
+        }
+    }
+
+    public void CheckPlugs()
+    {
+        foreach (var item in plugs)
+        {
+            //If plugs name same with colors in PlugsARRAY we increase the compeleted sockets untill finish
+            if (item.GetComponent<BottomPlug>().currentSocket.name == item.GetComponent<BottomPlug>().socketColor)
+            {
+                completedSockets++;
+            }
+        }
+
+        //When compeletedSockets count equals to level target, this code block will work
+        if (completedSockets == levelTargetSockets)
+        {
+            Debug.Log("All plugs in sockets");
+
+            //When we reach to all plugs we need to control them, they are straight or not
+            //We activated our CollisionDetections objects
+            foreach (var item in collisionControlObjects)
+            {
+                item.SetActive(true);
+            }
+        }
+        else
+        {
+            Debug.Log("Plugs are not compeleted");
+            
+        }
+        //We need to assaign 0 again because when this code block work again it need to start from 0
+        completedSockets = 0;
+    }
+
+    public void CheckCollision(int collisionIndex, bool collisionDetection)
+    {
+        collisionDetections[collisionIndex] = collisionDetection;
+
+
+        //If collisiondDetection objects situations trues
+        //If any collisionDetection collide with cable part we change to false it on CollisionDetection.cs
+        if (collisionDetections[0] && collisionDetections[1])
+        {
+            Debug.Log("Win");
+        }
+        else
+        {
+            Debug.Log("Fail");
         }
     }
 }

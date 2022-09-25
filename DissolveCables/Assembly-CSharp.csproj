@@ -59,6 +59,7 @@
     <Compile Include="Assets/Scripts/GameManager.cs" />
     <Compile Include="Assets/Scripts/BottomPlug.cs" />
     <Compile Include="Assets/Scripts/Socket.cs" />
+    <Compile Include="Assets/Scripts/CollisionDetection.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="UnityEngine">

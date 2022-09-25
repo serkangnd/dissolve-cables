@@ -7,7 +7,7 @@ public class BottomPlug : MonoBehaviour
     //Getting the clicked plug's socket
     public GameObject currentSocket;
     //Game will check if is true not, with socket color - plug color is matched.
-    [SerializeField] private string socketColor;
+    public string socketColor;
     [SerializeField] private GameManager _gameManager;
 
     //When the player select the plug, isSelected will trigger
@@ -77,6 +77,10 @@ public class BottomPlug : MonoBehaviour
                 _gameManager.isMoving = false;
                 //now our current plug's socket need to be changed with selectedSocket
                 currentSocket = targetSocket;
+
+                //Checking cable collision function all plug insert situatio
+                //It goes to GameManager.cs's method
+                _gameManager.CheckPlugs();
             }
         }
     }
