@@ -171,6 +171,7 @@ public class GameManager : MonoBehaviour
     //------ IF YOU WANT TO WHEN PLAYERS MATCH THE CABLES AND WAIT FOR THE STABILIZE OF CABLES OPEN THIS CODE -------
     IEnumerator IsCollisionDetected()
     {
+        isMoving = true;
         checkingLights[0].SetActive(false);
         checkingLights[1].SetActive(true);
 
@@ -201,11 +202,13 @@ public class GameManager : MonoBehaviour
 
             checkingText.text = "Fail";
             Invoke("ClosePanel", 1f);
+            isMoving = false;
 
             foreach (var item in collisionControlObjects)
             {
                 item.SetActive(false);
             }
+            
         }
 
         collisionControlCount = 0;
