@@ -73,7 +73,7 @@ public class BottomPlug : MonoBehaviour
         if (isSelected)
         {
             //After selection our game object will automatically go to movementPosition
-            transform.position = Vector3.Lerp(transform.position, movementPosition.transform.position, .010f);
+            transform.position = Vector3.Lerp(transform.position, movementPosition.transform.position, .020f);
             //If the distance between our plug and the position we send is less than .10f, the if block here will work.
             if (Vector3.Distance(transform.position,movementPosition.transform.position) < .10)
             {
@@ -84,7 +84,7 @@ public class BottomPlug : MonoBehaviour
         if (isPositionChanged)
         {
             //After selection our game object will automatically go to movementPosition
-            transform.position = Vector3.Lerp(transform.position, movementPosition.transform.position, .010f);
+            transform.position = Vector3.Lerp(transform.position, movementPosition.transform.position, .020f);
             //If the distance between our plug and the position we send is less than .10f, the if block here will work.
             if (Vector3.Distance(transform.position, movementPosition.transform.position) < .10)
             {
@@ -96,7 +96,7 @@ public class BottomPlug : MonoBehaviour
         if (isInsertToSocket)
         {
             //After selection our game object will automatically go to movementPosition
-            transform.position = Vector3.Lerp(transform.position, targetSocket.transform.position, .010f);
+            transform.position = Vector3.Lerp(transform.position, targetSocket.transform.position, .020f);
             //If the distance between our plug and the position we send is less than .10f, the if block here will work.
             if (Vector3.Distance(transform.position, targetSocket.transform.position) < .10)
             {
