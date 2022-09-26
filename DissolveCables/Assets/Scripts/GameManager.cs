@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
@@ -10,6 +11,7 @@ public class GameManager : MonoBehaviour
     private GameObject selectedPlug;
     private GameObject selectedSocket;
     public bool isMoving;
+    public bool isGameFinish = false;
 
     BottomPlug _bottomPlug;
 
@@ -27,11 +29,13 @@ public class GameManager : MonoBehaviour
     [Header("--- Other Objects ---")]
     [SerializeField] private GameObject[] checkingLights;
     [SerializeField] private AudioSource plugSFX;
+    [SerializeField] private ParticleSystem confettiParticle;
 
     [Header("--- UI Objects ---")]
     [SerializeField] private GameObject checkingImage;
     [SerializeField] private TextMeshProUGUI checkingText;
     [SerializeField] private TextMeshProUGUI movesText;
+    [SerializeField] private GameObject nextImage;
 
     private void Start()
     {
@@ -47,93 +51,96 @@ public class GameManager : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetMouseButtonDown(0))
+        if (!isGameFinish)
         {
-            if (Physics.Raycast(Camera.main.ScreenPointToRay(Input.mousePosition), out RaycastHit hit, 100))
+            if (Input.GetMouseButtonDown(0))
             {
-                if (hit.collider != null)
+                if (Physics.Raycast(Camera.main.ScreenPointToRay(Input.mousePosition), out RaycastHit hit, 100))
                 {
-                    // ## BOTTOM PLUB ##
-
-                    //If there is no selected object and if isMoving false, we can select the plugs
-                    if (selectedPlug == null && !isMoving)
+                    if (hit.collider != null)
                     {
-                        //If the raycast hits one of the plugs
-                        if (hit.collider.CompareTag("BluePlug") || hit.collider.CompareTag("RedPlug") || hit.collider.CompareTag("YellowPlug"))
+                        // ## BOTTOM PLUB ##
+
+                        //If there is no selected object and if isMoving false, we can select the plugs
+                        if (selectedPlug == null && !isMoving)
                         {
-                            //PLAY SOUND
-                            PlaySFX();
+                            //If the raycast hits one of the plugs
+                            if (hit.collider.CompareTag("BluePlug") || hit.collider.CompareTag("RedPlug") || hit.collider.CompareTag("YellowPlug"))
+                            {
+                                //PLAY SOUND
+                                PlaySFX();
 
-                            //It goes to the bottomplug script of the object it hits and calls the selectedPostion method from there.
-                            //This method takes 2 parameters. One is where the clicked object will go automatically, the other is which socket the object is in.
-                            /* Not Refactored
-                            hit.collider.GetComponent<BottomPlug>().SelectedPosition(hit.collider.GetComponent<BottomPlug>().currentSocket.GetComponent<Socket>().autoMovePosition, hit.collider.GetComponent<BottomPlug>().currentSocket);
-                            */
+                                //It goes to the bottomplug script of the object it hits and calls the selectedPostion method from there.
+                                //This method takes 2 parameters. One is where the clicked object will go automatically, the other is which socket the object is in.
+                                /* Not Refactored
+                                hit.collider.GetComponent<BottomPlug>().SelectedPosition(hit.collider.GetComponent<BottomPlug>().currentSocket.GetComponent<Socket>().autoMovePosition, hit.collider.GetComponent<BottomPlug>().currentSocket);
+                                */
 
-                            //Refacotred version
-                            _bottomPlug = hit.collider.GetComponent<BottomPlug>();
-                            _bottomPlug.MoveStart("SelectedPosition", _bottomPlug.currentSocket, _bottomPlug.currentSocket.GetComponent<Socket>().autoMovePosition);
+                                //Refacotred version
+                                _bottomPlug = hit.collider.GetComponent<BottomPlug>();
+                                _bottomPlug.MoveStart("SelectedPosition", _bottomPlug.currentSocket, _bottomPlug.currentSocket.GetComponent<Socket>().autoMovePosition);
 
-                            //We adding to variable our hitted plug and sockets
-                            selectedPlug = hit.collider.gameObject;
-                            selectedSocket = _bottomPlug.currentSocket;
+                                //We adding to variable our hitted plug and sockets
+                                selectedPlug = hit.collider.gameObject;
+                                selectedSocket = _bottomPlug.currentSocket;
 
-                            //We selected object so we have moving in the game
-                            isMoving = true;
+                                //We selected object so we have moving in the game
+                                isMoving = true;
+                            }
                         }
+                        // ## BOTTOM PLUB ##
+
+                        // ## SOCKET ##
+
+                        if (hit.collider.CompareTag("Socket"))
+                        {
+                            //If selected plug is not null and our socket need to avaliable or not.
+                            //If our raycast hit to another socket, different from our hitted plug's socket.
+                            if (selectedPlug != null && !hit.collider.GetComponent<Socket>().isSocketFull && selectedPlug != hit.collider.gameObject)
+                            {
+                                //When we send the plug to another socket, we empty the isSocketFull status of the selected socket.
+                                selectedSocket.GetComponent<Socket>().isSocketFull = false;
+
+                                Socket _socket = hit.collider.GetComponent<Socket>();
+
+                                _bottomPlug.MoveStart("ChangePosition", hit.collider.gameObject, _socket.autoMovePosition);
+
+                                //When our plug insert to new socker, our socket need to be not avaliable
+                                _socket.isSocketFull = true;
+
+                                //We cleart variables our hitted plug and sockets
+                                selectedPlug = null;
+                                selectedSocket = null;
+
+                                //Decrease our moves count for fail condition and update our movesText
+                                movesCount--;
+                                movesText.text = "Moves: " + movesCount.ToString();
+
+                                //We dont want to move another plug before our step is finish.
+                                isMoving = true;
+                            }
+                            //We cancel our moves here, our plug back to same socket
+                            else if (selectedSocket == hit.collider.gameObject)
+                            {
+                                //Assaign to our hit plug's socket to move back
+                                //Hit.collider.gameobject is a transform position for our plug
+                                _bottomPlug.MoveStart("BackToSocket", hit.collider.gameObject);
+
+                                //We cleart variables our hitted plug and sockets
+                                selectedPlug = null;
+                                selectedSocket = null;
+
+                                //We dont want to move another plug before our step is finish.
+                                isMoving = true;
+                            }
+                        }
+
+                        // ## SOCKET ##
+
                     }
-                    // ## BOTTOM PLUB ##
-
-                    // ## SOCKET ##
-
-                    if (hit.collider.CompareTag("Socket"))
-                    {
-                        //If selected plug is not null and our socket need to avaliable or not.
-                        //If our raycast hit to another socket, different from our hitted plug's socket.
-                        if (selectedPlug != null && !hit.collider.GetComponent<Socket>().isSocketFull && selectedPlug != hit.collider.gameObject)
-                        {
-                            //When we send the plug to another socket, we empty the isSocketFull status of the selected socket.
-                            selectedSocket.GetComponent<Socket>().isSocketFull = false;
-
-                            Socket _socket = hit.collider.GetComponent<Socket>();
-
-                            _bottomPlug.MoveStart("ChangePosition", hit.collider.gameObject, _socket.autoMovePosition);
-
-                            //When our plug insert to new socker, our socket need to be not avaliable
-                            _socket.isSocketFull = true;
-
-                            //We cleart variables our hitted plug and sockets
-                            selectedPlug = null;
-                            selectedSocket = null;
-
-                            //Decrease our moves count for fail condition and update our movesText
-                            movesCount--;
-                            movesText.text = "Moves: " + movesCount.ToString();
-
-                            //We dont want to move another plug before our step is finish.
-                            isMoving = true;
-                        }
-                        //We cancel our moves here, our plug back to same socket
-                        else if (selectedSocket == hit.collider.gameObject)
-                        {
-                            //Assaign to our hit plug's socket to move back
-                            //Hit.collider.gameobject is a transform position for our plug
-                            _bottomPlug.MoveStart("BackToSocket", hit.collider.gameObject);
-
-                            //We cleart variables our hitted plug and sockets
-                            selectedPlug = null;
-                            selectedSocket = null;
-
-                            //We dont want to move another plug before our step is finish.
-                            isMoving = true;
-                        }
-                    }
-
-                    // ## SOCKET ##
-
                 }
             }
-        }
+        } 
     }
 
     public void CheckPlugs()
@@ -164,9 +171,9 @@ public class GameManager : MonoBehaviour
         }
         else
         {
-            if (movesCount == 0)
+            if (movesCount <= 0)
             {
-                Debug.Log("Lost the game becasue you dont have more moves");
+                LoseCondition();
             }
         }
         //We need to assaign 0 again because when this code block work again it need to start from 0
@@ -176,7 +183,6 @@ public class GameManager : MonoBehaviour
     public void CheckCollision(int collisionIndex, bool collisionDetection)
     {
         collisionDetections[collisionIndex] = collisionDetection;
-
     }
 
 
@@ -185,9 +191,11 @@ public class GameManager : MonoBehaviour
     {
         //While checking player can not move the plugs
         isMoving = true;
+
         //Open-Close our light
         checkingLights[0].SetActive(false);
         checkingLights[1].SetActive(true);
+
         //Checking Image and text control
         checkingImage.SetActive(true);
         checkingText.text = "Checking...";
@@ -204,9 +212,8 @@ public class GameManager : MonoBehaviour
 
         if (collisionControlCount == collisionDetections.Count)
         {
-            checkingLights[1].SetActive(false);
-            checkingLights[2].SetActive(true);
-            checkingText.text = "Congrats!";
+            //winning method
+            WinCondition();
         }
         else
         {
@@ -215,13 +222,12 @@ public class GameManager : MonoBehaviour
 
             checkingText.text = "Fail";
             Invoke("ClosePanel", 1f);
-            //Player can moves again our plugs after fail situation
-            isMoving = false;
 
+            //Player can moves again our plugs after fail situation
             //Controlling our moves count if it fail
-            if (movesCount == 0)
+            if (movesCount <= 0)
             {
-                Debug.Log("Lost the game becasue you dont have more moves");
+                LoseCondition();
             }
 
             //If want close it and increase the checking time we can also open it
@@ -243,11 +249,29 @@ public class GameManager : MonoBehaviour
     }
     void WinCondition()
     {
+        checkingImage.SetActive(false);
+        checkingLights[1].SetActive(false);
+        checkingLights[2].SetActive(true);
+        confettiParticle.Play();
         PlayerPrefs.SetInt("Level", PlayerPrefs.GetInt("Level") + 1);
+        isGameFinish = true;
+        nextImage.SetActive(true);
+        
+    }
+    void LoseCondition()
+    {
+        isGameFinish = true;
+        //activate retry button
+        //add fail music
     }
     public void PlaySFX()
     {
         plugSFX.Play();
+    }
+
+    public void NextLevel()
+    {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
     }
 
 }
