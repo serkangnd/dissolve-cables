@@ -26,6 +26,7 @@ public class GameManager : MonoBehaviour
 
     [Header("--- Other Objects ---")]
     [SerializeField] private GameObject[] checkingLights;
+    [SerializeField] private AudioSource plugSFX;
 
     [Header("--- UI Objects ---")]
     [SerializeField] private GameObject checkingImage;
@@ -60,9 +61,11 @@ public class GameManager : MonoBehaviour
                         //If the raycast hits one of the plugs
                         if (hit.collider.CompareTag("BluePlug") || hit.collider.CompareTag("RedPlug") || hit.collider.CompareTag("YellowPlug"))
                         {
+                            //PLAY SOUND
+                            PlaySFX();
+
                             //It goes to the bottomplug script of the object it hits and calls the selectedPostion method from there.
                             //This method takes 2 parameters. One is where the clicked object will go automatically, the other is which socket the object is in.
-
                             /* Not Refactored
                             hit.collider.GetComponent<BottomPlug>().SelectedPosition(hit.collider.GetComponent<BottomPlug>().currentSocket.GetComponent<Socket>().autoMovePosition, hit.collider.GetComponent<BottomPlug>().currentSocket);
                             */
@@ -237,6 +240,14 @@ public class GameManager : MonoBehaviour
     void ClosePanel()
     {
         checkingImage.SetActive(false);
+    }
+    void WinCondition()
+    {
+        PlayerPrefs.SetInt("Level", PlayerPrefs.GetInt("Level") + 1);
+    }
+    public void PlaySFX()
+    {
+        plugSFX.Play();
     }
 
 }

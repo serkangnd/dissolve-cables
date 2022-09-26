@@ -100,6 +100,7 @@ public class BottomPlug : MonoBehaviour
             //If the distance between our plug and the position we send is less than .10f, the if block here will work.
             if (Vector3.Distance(transform.position, targetSocket.transform.position) < .10)
             {
+                _gameManager.PlaySFX();
                 isInsertToSocket = false;
                 _gameManager.isMoving = false;
                 //now our current plug's socket need to be changed with selectedSocket
