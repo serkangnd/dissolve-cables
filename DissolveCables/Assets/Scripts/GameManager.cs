@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 public class GameManager : MonoBehaviour
 {
@@ -13,16 +14,30 @@ public class GameManager : MonoBehaviour
     BottomPlug _bottomPlug;
 
     [Header("--- Level Settings ---")]
-    public GameObject[] collisionControlObjects;
-    public GameObject[] plugs;
-    public int levelTargetSockets;
-    public bool[] collisionDetections;
-    int completedSockets;
+    [SerializeField] private GameObject[] collisionControlObjects;
+    [SerializeField] private GameObject[] plugs;
+    [SerializeField] private int levelTargetSockets;
+    [SerializeField] private List<bool> collisionDetections;
 
+    int completedSockets;
+    int collisionControlCount;
+    //bool isGameFinish = false;
+
+    [Header("--- Other Objects ---")]
+    [SerializeField] private GameObject[] checkingLights;
+
+    [Header("--- UI Objects ---")]
+    [SerializeField] private GameObject checkingImage;
+    [SerializeField] private TextMeshProUGUI checkingText;
 
     private void Start()
     {
-        
+        //When our CollisionDetections objects increase it will one minus than our target
+        //Its a dynamic system for CollisionDetections Objects
+        for (int i = 0; i < levelTargetSockets-1; i++)
+        {
+            collisionDetections.Add(false);
+        }
     }
 
     private void Update()
@@ -123,7 +138,7 @@ public class GameManager : MonoBehaviour
         //When compeletedSockets count equals to level target, this code block will work
         if (completedSockets == levelTargetSockets)
         {
-            Debug.Log("All plugs in sockets");
+            Debug.Log("Plugs are completed");
 
             //When we reach to all plugs we need to control them, they are straight or not
             //We activated our CollisionDetections objects
@@ -131,10 +146,15 @@ public class GameManager : MonoBehaviour
             {
                 item.SetActive(true);
             }
+
+            //----------------- CABLES STABILIZE COROUTINE --------------
+            //Waiting for cables parts back to stabilize
+            StartCoroutine(IsCollisionDetected());
+            //----------------- CABLES STABILIZE COROUTINE --------------
         }
         else
         {
-            Debug.Log("Plugs are not compeleted");
+            //Debug.Log("Plugs are not compeleted");
             
         }
         //We need to assaign 0 again because when this code block work again it need to start from 0
@@ -145,16 +165,55 @@ public class GameManager : MonoBehaviour
     {
         collisionDetections[collisionIndex] = collisionDetection;
 
+    }
 
-        //If collisiondDetection objects situations trues
-        //If any collisionDetection collide with cable part we change to false it on CollisionDetection.cs
-        if (collisionDetections[0] && collisionDetections[1])
+
+    //------ IF YOU WANT TO WHEN PLAYERS MATCH THE CABLES AND WAIT FOR THE STABILIZE OF CABLES OPEN THIS CODE -------
+    IEnumerator IsCollisionDetected()
+    {
+        checkingLights[0].SetActive(false);
+        checkingLights[1].SetActive(true);
+
+        checkingImage.SetActive(true);
+        checkingText.text = "Checking...";
+
+        Debug.Log("Cables Are Checking");
+        yield return new WaitForSeconds(2f);
+
+        foreach (var item in collisionDetections)
         {
-            Debug.Log("Win");
+            if (item)
+            {
+                collisionControlCount++;
+            }
+        }
+
+        if (collisionControlCount == collisionDetections.Count)
+        {
+            checkingLights[1].SetActive(false);
+            checkingLights[2].SetActive(true);
+            checkingText.text = "Congrats!";
         }
         else
         {
-            Debug.Log("Fail");
+            checkingLights[0].SetActive(true);
+            checkingLights[1].SetActive(false);
+
+            checkingText.text = "Fail";
+            Invoke("ClosePanel", 1f);
+
+            foreach (var item in collisionControlObjects)
+            {
+                item.SetActive(false);
+            }
         }
+
+        collisionControlCount = 0;
     }
+
+    void ClosePanel()
+    {
+        checkingImage.SetActive(false);
+    }
+
 }

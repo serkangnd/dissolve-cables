@@ -13,17 +13,17 @@ public class CollisionDetection : MonoBehaviour
 
         for (int i = 0; i < hitColliders.Length; i++)
         {
-            
-            //Colliderlara herhangi bir kablo parçası çarparsa
+
+            //If Colliders get hit by any piece of cable
             if (hitColliders[i].CompareTag("CablePart"))
             {
-                //Kablo parçası çarptığı için false değer gelecek
+                //False value will turn because the piece of cable is hit.
                 _gameManager.CheckCollision(collisionIndex, false);
             }
             else
             {
-                
-                //Çarpmıyor ise true değer gelecek
+
+                //If it does not collide, true value will be returned.
                 _gameManager.CheckCollision(collisionIndex, true);
 
             }
