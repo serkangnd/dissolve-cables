@@ -29,13 +29,16 @@ public class GameManager : MonoBehaviour
     [Header("--- Other Objects ---")]
     [SerializeField] private GameObject[] checkingLights;
     [SerializeField] private AudioSource plugSFX;
+    [SerializeField] private AudioSource failSFX;
     [SerializeField] private ParticleSystem confettiParticle;
+    [SerializeField] private ParticleSystem failParticle;
 
     [Header("--- UI Objects ---")]
     [SerializeField] private GameObject checkingImage;
     [SerializeField] private TextMeshProUGUI checkingText;
     [SerializeField] private TextMeshProUGUI movesText;
     [SerializeField] private GameObject nextImage;
+    [SerializeField] private GameObject retryImage;
 
     private void Start()
     {
@@ -219,9 +222,10 @@ public class GameManager : MonoBehaviour
         {
             checkingLights[0].SetActive(true);
             checkingLights[1].SetActive(false);
-
+            
             checkingText.text = "Fail";
             Invoke("ClosePanel", 1f);
+            isMoving = false;
 
             //Player can moves again our plugs after fail situation
             //Controlling our moves count if it fail
@@ -238,7 +242,7 @@ public class GameManager : MonoBehaviour
             //}
 
         }
-
+        //reset collision control count for when it controls again it need to start from 0
         collisionControlCount = 0;
     }
 
@@ -247,6 +251,7 @@ public class GameManager : MonoBehaviour
     {
         checkingImage.SetActive(false);
     }
+
     void WinCondition()
     {
         checkingImage.SetActive(false);
@@ -261,9 +266,11 @@ public class GameManager : MonoBehaviour
     void LoseCondition()
     {
         isGameFinish = true;
-        //activate retry button
-        //add fail music
+        retryImage.SetActive(true);
+        failSFX.Play();
+        failParticle.Play();
     }
+
     public void PlaySFX()
     {
         plugSFX.Play();
@@ -272,6 +279,10 @@ public class GameManager : MonoBehaviour
     public void NextLevel()
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+    }
+    public void RestartLevel()
+    {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 
 }

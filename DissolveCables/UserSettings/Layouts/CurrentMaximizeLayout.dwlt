@@ -187,8 +187,8 @@ MonoBehaviour:
     y: 0
     width: 256
     height: 462
-  m_MinSize: {x: 201, y: 221}
-  m_MaxSize: {x: 4001, y: 4021}
+  m_MinSize: {x: 200, y: 200}
+  m_MaxSize: {x: 4000, y: 4000}
   m_ActualView: {fileID: 6}
   m_Panes:
   - {fileID: 6}
@@ -227,7 +227,7 @@ MonoBehaviour:
       scrollPos: {x: 0, y: 0}
       m_SelectedIDs: 
       m_LastClickedID: 0
-      m_ExpandedIDs: 42deffffd0f0ffff32fbffff945e0000
+      m_ExpandedIDs: 529affff529bffff009ffffff89fffff48a0ffff98a0ffffe8a0ffff38a1ffff30a2ffff20abffff2cb9ffff04baffffa2baffff0cc1ffff8ac1fffff0c1ffff56c2ffff64c3ffffdac3ffff6ac4ffffd0c4ffff28c5ffff8ec5ffffdec5ffff44c6ffff94c6ffff02c7ffff36f0ffff90f0ffff34f1ffff32f8ffff2afbfffffa6d0000221401004e1401006a330100dc4201000843010086ac0100b2ac010072c701009ec701005ad20100
       m_RenameOverlay:
         m_UserAcceptedRename: 0
         m_Name: 
@@ -502,9 +502,9 @@ MonoBehaviour:
   m_PlayAudio: 0
   m_AudioPlay: 0
   m_Position:
-    m_Target: {x: 0.093803644, y: 3.662925, z: -4.3500314}
+    m_Target: {x: 3.6091096, y: 3.466404, z: -7.328998}
     speed: 2
-    m_Value: {x: 0.093803644, y: 3.662925, z: -4.3500314}
+    m_Value: {x: 3.6091096, y: 3.466404, z: -7.328998}
   m_RenderMode: 0
   m_CameraMode:
     drawMode: 0
@@ -551,13 +551,13 @@ MonoBehaviour:
     m_GridAxis: 1
     m_gridOpacity: 0.5
   m_Rotation:
-    m_Target: {x: 0.17459875, y: -0.003840736, z: 0.0006796771, w: 0.98462117}
+    m_Target: {x: 0.27773112, y: -0.3968463, z: 0.12733805, w: 0.8655289}
     speed: 2
-    m_Value: {x: 0.1746006, y: -0.0038407769, z: 0.00067968434, w: 0.9846316}
+    m_Value: {x: 0.27773434, y: -0.3968509, z: 0.12733953, w: 0.86553895}
   m_Size:
-    m_Target: 1.078921
+    m_Target: 1.2580605
     speed: 2
-    m_Value: 1.078921
+    m_Value: 1.2580605
   m_Ortho:
     m_Target: 0
     speed: 2
@@ -676,38 +676,38 @@ MonoBehaviour:
     m_SkipHidden: 0
     m_SearchArea: 1
     m_Folders:
-    - Assets/Materials
+    - Assets/Scripts
     m_Globs: []
     m_OriginalText: 
   m_ViewMode: 1
   m_StartGridSize: 64
   m_LastFolders:
-  - Assets/Materials
+  - Assets/Scripts
   m_LastFoldersGridSize: -1
   m_LastProjectPath: /Users/serkan/Documents/GitHub/dissolve-cables/DissolveCables
   m_LockTracker:
     m_IsLocked: 0
   m_FolderTreeState:
     scrollPos: {x: 0, y: 0}
-    m_SelectedIDs: 6e5f0000
-    m_LastClickedID: 24430
-    m_ExpandedIDs: 00000000565f000000ca9a3b
+    m_SelectedIDs: 9e5f0000
+    m_LastClickedID: 24478
+    m_ExpandedIDs: 00000000805f000000ca9a3b
     m_RenameOverlay:
       m_UserAcceptedRename: 0
-      m_Name: 
-      m_OriginalName: 
+      m_Name: ConfettiBlast
+      m_OriginalName: ConfettiBlast
       m_EditFieldRect:
         serializedVersion: 2
         x: 0
         y: 0
         width: 0
         height: 0
-      m_UserData: 0
+      m_UserData: 24780
       m_IsWaitingForDelay: 0
       m_IsRenaming: 0
-      m_OriginalEventType: 11
+      m_OriginalEventType: 0
       m_IsRenamingFilename: 1
-      m_ClientGUIView: {fileID: 0}
+      m_ClientGUIView: {fileID: 10}
     m_SearchString: 
     m_CreateAssetUtility:
       m_EndAction: {fileID: 0}
@@ -719,7 +719,7 @@ MonoBehaviour:
     scrollPos: {x: 0, y: 0}
     m_SelectedIDs: 
     m_LastClickedID: 0
-    m_ExpandedIDs: 00000000565f0000
+    m_ExpandedIDs: 00000000805f0000825f0000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
