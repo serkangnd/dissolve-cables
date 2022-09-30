@@ -356,6 +356,7 @@
 -r:"Library/Bee/artifacts/1300b0aE.dag/UnityEngine.UI.ref.dll"
 "Assets/Scripts/BottomPlug.cs"
 "Assets/Scripts/CollisionDetection.cs"
+"Assets/Scripts/CutCablePart.cs"
 "Assets/Scripts/GameManager.cs"
 "Assets/Scripts/Socket.cs"
 -langversion:9.0

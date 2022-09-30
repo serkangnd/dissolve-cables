@@ -21,6 +21,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] private int levelTargetSockets;
     [SerializeField] private List<bool> collisionDetections;
     [SerializeField] private int movesCount;
+    [SerializeField] private HingeJoint[] cutableCableParts;
 
     int completedSockets;
     int collisionControlCount;
@@ -49,6 +50,19 @@ public class GameManager : MonoBehaviour
         for (int i = 0; i < levelTargetSockets-1; i++)
         {
             collisionDetections.Add(false);
+        }
+
+        Invoke("FixTheForcesForCableParts", 1f);
+    }
+
+    void FixTheForcesForCableParts()
+    {
+        //When we too much force to our cables, cables will be cut from the those parts
+        //When game start, our cables never cut because of infinity value, we are changing those values here
+        foreach (var item in cutableCableParts)
+        {
+            item.breakForce = 600;
+            item.breakTorque = 500;
         }
     }
 
@@ -263,7 +277,7 @@ public class GameManager : MonoBehaviour
         nextImage.SetActive(true);
         
     }
-    void LoseCondition()
+    public void LoseCondition()
     {
         isGameFinish = true;
         retryImage.SetActive(true);

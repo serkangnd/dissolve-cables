@@ -60,6 +60,7 @@
     <Compile Include="Assets/Scripts/GameManager.cs" />
     <Compile Include="Assets/Scripts/BottomPlug.cs" />
     <Compile Include="Assets/Scripts/Socket.cs" />
+    <Compile Include="Assets/Scripts/CutCablePart.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets/TextMesh Pro/Shaders/TMPro.cginc" />
