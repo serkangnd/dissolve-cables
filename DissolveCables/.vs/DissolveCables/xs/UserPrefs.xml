@@ -1,11 +1,11 @@
 ﻿<Properties StartupConfiguration="{DF172589-E46E-D51C-FE79-48BF3D30974A}|">
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/CutCablePart.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/GameManager.cs">
     <Files>
-      <File FileName="Assets/Scripts/GameManager.cs" Line="270" Column="24" />
-      <File FileName="Assets/Scripts/CollisionDetection.cs" />
+      <File FileName="Assets/Scripts/GameManager.cs" Line="55" Column="46" />
+      <File FileName="Assets/Scripts/CollisionDetection.cs" Line="26" Column="71" />
       <File FileName="Assets/Scripts/Socket.cs" />
       <File FileName="Assets/Scripts/BottomPlug.cs" />
-      <File FileName="Assets/Scripts/CutCablePart.cs" Line="1" Column="1" />
+      <File FileName="Assets/Scripts/CutCablePart.cs" Line="14" Column="10" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.PinnedWatches />

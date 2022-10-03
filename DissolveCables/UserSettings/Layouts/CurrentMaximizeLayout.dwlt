@@ -225,9 +225,9 @@ MonoBehaviour:
   m_SceneHierarchy:
     m_TreeViewState:
       scrollPos: {x: 0, y: 0}
-      m_SelectedIDs: 765f0000
+      m_SelectedIDs: 
       m_LastClickedID: 0
-      m_ExpandedIDs: 0083ffff32fbffffc05c0000
+      m_ExpandedIDs: 88a6ffff32fbffff9e5d00000a5f0000685f0000
       m_RenameOverlay:
         m_UserAcceptedRename: 0
         m_Name: 
@@ -243,7 +243,7 @@ MonoBehaviour:
         m_IsRenaming: 0
         m_OriginalEventType: 11
         m_IsRenamingFilename: 0
-        m_ClientGUIView: {fileID: 5}
+        m_ClientGUIView: {fileID: 0}
       m_SearchString: 
     m_ExpandedScenes: []
     m_CurrenRootInstanceID: 0
@@ -502,9 +502,9 @@ MonoBehaviour:
   m_PlayAudio: 0
   m_AudioPlay: 0
   m_Position:
-    m_Target: {x: 88.778854, y: 23.767374, z: -87.95595}
+    m_Target: {x: -0.029778779, y: 4.2291145, z: -5.2283845}
     speed: 2
-    m_Value: {x: 88.778854, y: 23.767374, z: -87.95595}
+    m_Value: {x: -0.029778764, y: 4.2291145, z: -5.228386}
   m_RenderMode: 0
   m_CameraMode:
     drawMode: 0
@@ -551,13 +551,13 @@ MonoBehaviour:
     m_GridAxis: 1
     m_gridOpacity: 0.5
   m_Rotation:
-    m_Target: {x: 0.022854175, y: -0.30487248, z: 0.007321087, w: 0.9520747}
+    m_Target: {x: -0.010489465, y: 0.039585397, z: 0.00041852694, w: 0.99914175}
     speed: 2
-    m_Value: {x: -0.022854175, y: 0.30487248, z: -0.007321087, w: -0.95207465}
+    m_Value: {x: 0.010489465, y: -0.039585397, z: -0.00041852694, w: -0.99914175}
   m_Size:
-    m_Target: 0.1943848
+    m_Target: 0.7699004
     speed: 2
-    m_Value: 0.19438457
+    m_Value: 0.7699004
   m_Ortho:
     m_Target: 0
     speed: 2
@@ -676,22 +676,22 @@ MonoBehaviour:
     m_SkipHidden: 0
     m_SearchArea: 1
     m_Folders:
-    - Assets/Materials/ColorMats
+    - Assets/Sprites
     m_Globs: []
     m_OriginalText: 
   m_ViewMode: 1
   m_StartGridSize: 64
   m_LastFolders:
-  - Assets/Materials/ColorMats
+  - Assets/Sprites
   m_LastFoldersGridSize: -1
   m_LastProjectPath: /Users/serkan/Documents/GitHub/dissolve-cables/DissolveCables
   m_LockTracker:
     m_IsLocked: 0
   m_FolderTreeState:
     scrollPos: {x: 0, y: 0}
-    m_SelectedIDs: 32610000
-    m_LastClickedID: 24882
-    m_ExpandedIDs: 00000000d45f0000dc5f000000ca9a3b
+    m_SelectedIDs: 38610000
+    m_LastClickedID: 24888
+    m_ExpandedIDs: 000000001861000000ca9a3b
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -719,7 +719,7 @@ MonoBehaviour:
     scrollPos: {x: 0, y: 0}
     m_SelectedIDs: 
     m_LastClickedID: 0
-    m_ExpandedIDs: 00000000d45f000000ca9a3b
+    m_ExpandedIDs: 000000001861000000ca9a3b
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -744,10 +744,10 @@ MonoBehaviour:
       m_Icon: {fileID: 0}
       m_ResourceFile: 
   m_ListAreaState:
-    m_SelectedInstanceIDs: 765f0000
-    m_LastClickedInstanceID: 24438
+    m_SelectedInstanceIDs: 
+    m_LastClickedInstanceID: 0
     m_HadKeyboardFocusLastEvent: 1
-    m_ExpandedInstanceIDs: c6230000
+    m_ExpandedInstanceIDs: c6230000a6610000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
