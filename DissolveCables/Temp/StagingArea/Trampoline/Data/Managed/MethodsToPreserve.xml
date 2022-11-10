@@ -1,8 +1,0 @@
-<linker>
-	<assembly fullname="Assembly-CSharp" ignoreIfMissing="1">
-		<type fullname="GameManager">
-			<method name="NextLevel"/>
-			<method name="RestartLevel"/>
-		</type>
-	</assembly>
-</linker>

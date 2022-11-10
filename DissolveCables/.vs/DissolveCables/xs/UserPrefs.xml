@@ -1,16 +1,16 @@
 ﻿<Properties StartupConfiguration="{DF172589-E46E-D51C-FE79-48BF3D30974A}|">
   <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/BottomPlug.cs">
     <Files>
+      <File FileName="Assets/Scripts/BottomPlug.cs" Line="99" Column="102" />
       <File FileName="Assets/Scripts/GameManager.cs" Line="55" Column="46" />
       <File FileName="Assets/Scripts/CollisionDetection.cs" />
       <File FileName="Assets/Scripts/Socket.cs" />
-      <File FileName="Assets/Scripts/BottomPlug.cs" Line="99" Column="101" />
       <File FileName="Assets/Scripts/CutCablePart.cs" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.PinnedWatches />
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MonoDevelop.Ide.ItemProperties.Assembly-CSharp PreferredExecutionTarget="053ea6d2-2267-4562-8b61-e6907e86735e" />
+  <MonoDevelop.Ide.ItemProperties.Assembly-CSharp PreferredExecutionTarget="42d46e33-6995-47be-ab68-184590f94a2b" />
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
     <BreakpointStore />
   </MonoDevelop.Ide.DebuggingService.Breakpoints>

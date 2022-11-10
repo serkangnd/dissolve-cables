@@ -1,0 +1,4 @@
+#Wed Nov 09 06:05:39 EET 2022
+base.0=/Users/serkan/Documents/GitHub/dissolve-cables/DissolveCables/Library/Bee/Android/Prj/Mono2x/Gradle/launcher/build/intermediates/dex/release/mergeDexRelease/classes.dex
+path.0=classes.dex
+renamed.0=classes.dex
